@@ -1,0 +1,35 @@
+# oe_test_secsitive_force_visit_control_001
+
+## 描述
+
+强制访问控制应与用户身份鉴别/标记等安全功能密切配合，使系统对用户的安全控制包含从用户进入系统到退出系统的全过程，对客体的控制范围涉及操作系统内部的存储/处理/传输过程
+
+## 预置条件
+
+## 测试步骤
+
+1.安全管理员secadm登录并执行id命令
+
+```$id```
+
+2.安全管理员secadm登录并执行命令:
+
+```$su -
+(1)#getenforce
+(2)#systemctl restart auditd
+(3)#cat /var/log/audit/audit.log
+(4)#cat /etc/selinux/config > /home/sysadn/seconfig
+```
+
+## 预期结果
+
+1.显示安全管理员secadm的进程安全上下文，包含安全用户，安全角色/安全类型以及敏感标记
+
+2.(1)运行成功返回Enforcing
+（2）重启审计后台服务失败，Permission denied
+（3）读取当前审计日志失败，Permission denied
+（4）读取安全配置软件传输到sysadm的home目录下，Permission denied
+
+## 备注
+
+无安全管理员身份
